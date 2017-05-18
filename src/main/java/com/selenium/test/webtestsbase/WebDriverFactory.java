@@ -54,8 +54,8 @@ public class WebDriverFactory {
                     case CHROME:
                         driver = new ChromeDriver(CapabilitiesGenerator.getDefaultCapabilities(Browser.CHROME));
                         break;
-                    case IE10:
-                        driver = new InternetExplorerDriver(CapabilitiesGenerator.getDefaultCapabilities(Browser.IE10));
+                    case IE11:
+                        driver = new InternetExplorerDriver(CapabilitiesGenerator.getDefaultCapabilities(Browser.IE11));
                         break;
                     case SAFARI:
                         driver = new SafariDriver(CapabilitiesGenerator.getDefaultCapabilities(Browser.SAFARI));

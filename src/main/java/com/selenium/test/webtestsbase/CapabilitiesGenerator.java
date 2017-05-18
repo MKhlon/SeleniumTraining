@@ -9,6 +9,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class CapabilitiesGenerator {
 
+    private static final String PATH_TO_FIREFOXDRIVER_EXE = "C:\\Training\\Grid\\geckodriver-v0.16.1-win64\\geckodriver.exe";
+    private static final String PATH_TO_CHROMEDRIVER_EXE = "C:\\Training\\Grid\\chromedriver.exe";
+    private static final String PATH_TO_IEDRIVER_EXE = "C:\\Training\\Grid\\IEDriverServer.exe";
+
+
     /**
      * getting {@link org.openqa.selenium.remote.DesiredCapabilities} object based on browser
      * ATTENTION: you should specify the path to chrome driver executable file to run tests on it(@see <a href="https://sites.google.com/a/chromium.org/chromedriver/getting-started">here for more info</a>)
@@ -18,15 +23,18 @@ public class CapabilitiesGenerator {
     public static DesiredCapabilities getDefaultCapabilities(Browser browser) {
         switch (browser) {
             case FIREFOX:
+                System.setProperty("webdriver.gecko.driver", PATH_TO_FIREFOXDRIVER_EXE);
                 return DesiredCapabilities.firefox();
             case CHROME:
+                System.setProperty("webdriver.chrome.driver", PATH_TO_CHROMEDRIVER_EXE);
                 if (System.getProperty("webdriver.chrome.driver") == null) {
                     throw new IllegalStateException("System variable 'webdriver.chrome.driver' should be set to path for executable driver");
                 }
                 return DesiredCapabilities.chrome();
-            case IE10:
+            case IE11:
+                System.setProperty("webdriver.ie.driver", PATH_TO_IEDRIVER_EXE);
                 DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-                caps.setVersion("10");
+                caps.setVersion("11");
                 return caps;
             case SAFARI:
                 return new DesiredCapabilities();
