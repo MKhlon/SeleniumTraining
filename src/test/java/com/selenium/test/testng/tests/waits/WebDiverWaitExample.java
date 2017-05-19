@@ -99,6 +99,7 @@ public class WebDiverWaitExample {
         WebDriverFactory.getDriver().findElement(By.id("button-cart")).click();
     }
 
+    // example from: http://qeworks.com/handle-ajax-call-selenium-webdriver/
     public void waitForAjax(int timeoutInSeconds) {
 
         WebDriver driver = WebDriverFactory.getDriver();
