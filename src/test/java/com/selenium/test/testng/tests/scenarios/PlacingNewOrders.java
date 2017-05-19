@@ -17,6 +17,7 @@ public class PlacingNewOrders {
 
     private static final String CATEGORY = "Akcesoria";
     private static final String SUBCATEGORY = "Monitory";
+    private static final String ITEM = "Samsung SyncMaster 941BW";
 
     @BeforeTest
     public void beforeTest() {
@@ -25,7 +26,9 @@ public class PlacingNewOrders {
 
     @Test
     public void shouldPlaceNewOrderWithoutRegistration() {
-        new LandingPage().goToProductList(CATEGORY, SUBCATEGORY);
+        new LandingPage()
+                .goToProductList(CATEGORY, SUBCATEGORY)
+                    .addItemToCart(ITEM);
     }
 
     @AfterTest

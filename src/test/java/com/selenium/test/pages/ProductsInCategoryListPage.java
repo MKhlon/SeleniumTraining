@@ -21,4 +21,8 @@ public class ProductsInCategoryListPage extends BasePage {
         return getDriver().findElement(By.cssSelector("div#content h2")).isDisplayed();
     }
 
+    public ProductsInCategoryListPage addItemToCart(String itemName) {
+        getDriver().findElement(By.xpath("//div[./div/h4/a[contains(text(),'" + itemName + "')]]/div[contains(@class,'button-group')]/button[contains(@onclick,'cart')]")).click();
+        return this;
+    }
 }
