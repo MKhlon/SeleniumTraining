@@ -31,6 +31,8 @@ public class TestsConfig {
     @Property("browser.version")
     private String version = "";
 
+    @Property("base.url")
+    private static String baseURL = "http://sklep-testowy.pl";
 
     /**
      * getting browser object
@@ -54,4 +56,7 @@ public class TestsConfig {
     }
 
 
+    public static String getBaseURL(){
+        return baseURL;
+    }
 }

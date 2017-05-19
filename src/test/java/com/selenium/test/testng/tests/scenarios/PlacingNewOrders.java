@@ -1,5 +1,6 @@
 package com.selenium.test.testng.tests.scenarios;
 
+import com.selenium.test.pages.LandingPage;
 import com.selenium.test.testng.listeners.ScreenShotOnFailListener;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.openqa.selenium.By;
@@ -14,8 +15,6 @@ import static org.junit.Assert.assertTrue;
 @Listeners({ScreenShotOnFailListener.class})
 public class PlacingNewOrders {
 
-    private final String BASE_URL = "http://sklep-testowy.pl";
-
     @BeforeTest
     public void beforeTest() {
         WebDriverFactory.startBrowser(true);
@@ -23,7 +22,7 @@ public class PlacingNewOrders {
 
     @Test
     public void shouldPlaceNewOrderWithoutRegistration() {
-        WebDriverFactory.getDriver().get(BASE_URL);
+        new LandingPage();
     }
 
     @AfterTest
