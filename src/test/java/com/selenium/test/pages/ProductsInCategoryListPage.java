@@ -13,6 +13,9 @@ import static com.selenium.test.webtestsbase.WebDriverFactory.getDriver;
  */
 public class ProductsInCategoryListPage extends BasePage {
 
+    private static String pageHeaderLocator = "div#content h2";
+    private String showCartItemsBtnLocator = "div.col-sm-3 button";
+
     public ProductsInCategoryListPage() {
         super(false);
     }
@@ -23,7 +26,7 @@ public class ProductsInCategoryListPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return getDriver().findElement(By.cssSelector("div#content h2")).isDisplayed();
+        return getDriver().findElement(By.cssSelector(pageHeaderLocator)).isDisplayed();
     }
 
     public ProductsInCategoryListPage addItemToCart(String itemName) {
@@ -33,7 +36,7 @@ public class ProductsInCategoryListPage extends BasePage {
 
     public ProductsInCategoryListPage showCartItemsList() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.col-sm-3 button"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(showCartItemsBtnLocator))).click();
         return this;
     }
 }
