@@ -28,7 +28,8 @@ public class PlacingNewOrders {
     public void shouldPlaceNewOrderWithoutRegistration() {
         new LandingPage()
                 .goToProductList(CATEGORY, SUBCATEGORY)
-                    .addItemToCart(ITEM);
+                    .addItemToCart(ITEM)
+                    .showCartItemsList();
     }
 
     @AfterTest
