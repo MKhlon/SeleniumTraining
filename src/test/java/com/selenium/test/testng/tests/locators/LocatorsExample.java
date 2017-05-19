@@ -25,7 +25,7 @@ public class LocatorsExample {
 
 
     @Test
-    public void testFillGoogleForm() {
+    public void shouldShowHowLocatorsWorkInWebDriver() {
         WebDriverFactory.getDriver().get("http://sklep-testowy.pl");
 
         //By.id()
