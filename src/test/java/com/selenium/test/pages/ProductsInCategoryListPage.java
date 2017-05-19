@@ -2,11 +2,8 @@ package com.selenium.test.pages;
 
 import com.selenium.test.webtestsbase.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static com.selenium.test.webtestsbase.WebDriverFactory.getDriver;
 
 /**
  * Created by SG0943274 on 2017-03-23.
@@ -15,6 +12,7 @@ public class ProductsInCategoryListPage extends BasePage {
 
     private static String pageHeaderLocator = "div#content h2";
     private String showCartItemsBtnLocator = "div.col-sm-3 button";
+    private String goToCheckoutFromCartIcn = "div#cart i.fa-share";
 
     public ProductsInCategoryListPage() {
         super(false);
@@ -38,5 +36,11 @@ public class ProductsInCategoryListPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(getDriver(), 5);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(showCartItemsBtnLocator))).click();
         return this;
+    }
+
+    public CheckoutPage goToCheckout() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(goToCheckoutFromCartIcn))).click();
+        return new CheckoutPage(false);
     }
 }

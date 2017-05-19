@@ -3,8 +3,6 @@ package com.selenium.test.testng.tests.scenarios;
 import com.selenium.test.pages.LandingPage;
 import com.selenium.test.testng.listeners.ScreenShotOnFailListener;
 import com.selenium.test.webtestsbase.WebDriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -29,7 +27,8 @@ public class PlacingNewOrders {
         new LandingPage()
                 .goToProductList(CATEGORY, SUBCATEGORY)
                     .addItemToCart(ITEM)
-                    .showCartItemsList();
+                    .showCartItemsList()
+                    .goToCheckout();
     }
 
     @AfterTest
