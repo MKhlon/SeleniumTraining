@@ -15,6 +15,9 @@ import static org.junit.Assert.assertTrue;
 @Listeners({ScreenShotOnFailListener.class})
 public class PlacingNewOrders {
 
+    private static final String CATEGORY = "Akcesoria";
+    private static final String SUBCATEGORY = "Monitory";
+
     @BeforeTest
     public void beforeTest() {
         WebDriverFactory.startBrowser(true);
@@ -22,7 +25,7 @@ public class PlacingNewOrders {
 
     @Test
     public void shouldPlaceNewOrderWithoutRegistration() {
-        new LandingPage();
+        new LandingPage().goToProductList(CATEGORY, SUBCATEGORY);
     }
 
     @AfterTest
