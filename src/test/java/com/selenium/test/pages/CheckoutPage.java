@@ -21,6 +21,15 @@ public class CheckoutPage extends BasePage {
     private String guestCheckoutRadioBtnCssLocator = "input[value=guest]";
     private String checkoutOptionAccordionIdLocator = "collapse-checkout-option";
     private String continueCheckoutOptionsBtnIdLocator = "button-account";
+    private String firstNamePersonalDataInputIdLocator = "input-payment-firstname";
+    private String lastNamePersonalDataInputIdLocator = "input-payment-lastname";
+    private String emailPersonalDataInputIdLocator = "input-payment-email";
+    private String phonePersonalDataInputIdLocator = "input-payment-telephone";
+    private String address1PersonalDataInputIdLocator = "input-payment-address-1";
+    private String cityPersonalDataInputIdLocator = "input-payment-city";
+    private String postCodePersonalDataInputIdLocator = "input-payment-postcode";
+    private String countryPersonalDataSelectIdLocator = "input-payment-country";
+    private String regionPersonalDataSelectIdLocator = "input-payment-zone";
 
     public CheckoutPage(boolean openPageByUrl) {
         super(openPageByUrl);
@@ -45,5 +54,54 @@ public class CheckoutPage extends BasePage {
         new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.id(continueCheckoutOptionsBtnIdLocator), 5);
         new ActionBot(getDriver()).waitUntilElementInvisible(By.id(checkoutOptionAccordionIdLocator), 5);
         return this;
+    }
+
+    public CheckoutPage fillFormWithRequiredPersonalData(Buyer buyer, Address address){
+        typeFirstName(buyer.getFirstName());
+        typeLastName(buyer.getLastName());
+        typeEmailAddress(buyer.getEmail());
+        typePhoneNumber(buyer.getPhone());
+        typeAddressPart1(address.getAddressPart1());
+        typeCity(address.getCity());
+        typePostCode(address.getPostCode());
+        selectCountry(address.getCountry());
+        selectRegionOrState(address.getRegion());
+        return this;
+    }
+
+    private void typeFirstName(String firstName) {
+        new ActionBot(getDriver()).type(By.id(firstNamePersonalDataInputIdLocator), firstName);
+    }
+
+    private void typeLastName(String lastName) {
+        new ActionBot(getDriver()).type(By.id(lastNamePersonalDataInputIdLocator), lastName);
+    }
+
+    private void typeEmailAddress(String email) {
+        new ActionBot(getDriver()).type(By.id(emailPersonalDataInputIdLocator), email);
+    }
+
+    private void typePhoneNumber(String phone) {
+        new ActionBot(getDriver()).type(By.id(phonePersonalDataInputIdLocator), phone);
+    }
+
+    private void typeAddressPart1(String address) {
+        new ActionBot(getDriver()).type(By.id(address1PersonalDataInputIdLocator), address);
+    }
+
+    private void typeCity(String city) {
+        new ActionBot(getDriver()).type(By.id(cityPersonalDataInputIdLocator), city);
+    }
+
+    private void typePostCode(String postCode) {
+        new ActionBot(getDriver()).type(By.id(postCodePersonalDataInputIdLocator), postCode);
+    }
+
+    private void selectCountry(String countryName) {
+        new ActionBot(getDriver()).selectByVisibleText(By.id(countryPersonalDataSelectIdLocator), countryName);
+    }
+
+    private void selectRegionOrState(String region) {
+        new ActionBot(getDriver()).selectByVisibleText(By.id(regionPersonalDataSelectIdLocator), region);
     }
 }
