@@ -28,7 +28,8 @@ public class PlacingNewOrders {
                 .goToProductList(CATEGORY, SUBCATEGORY)
                     .addItemToCart(ITEM)
                     .showCartItemsList()
-                    .goToCheckout();
+                    .goToCheckout()
+                        .selectGuestCheckoutOption();
     }
 
     @AfterTest

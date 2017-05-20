@@ -2,6 +2,7 @@ package com.selenium.test.pages;
 
 import com.selenium.test.to.Address;
 import com.selenium.test.to.Buyer;
+import com.selenium.test.utils.ActionBot;
 import com.selenium.test.webtestsbase.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,8 @@ public class CheckoutPage extends BasePage {
 
     private WebElement accordion; // it works because id of element is "accordion'
 
+    private String guestCheckoutRadioBtnCssLocator = "input[value=guest]";
+
     public CheckoutPage(boolean openPageByUrl) {
         super(openPageByUrl);
     }
@@ -30,4 +33,8 @@ public class CheckoutPage extends BasePage {
         return accordion.isDisplayed();
     }
 
+    public CheckoutPage selectGuestCheckoutOption() {
+        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.cssSelector(guestCheckoutRadioBtnCssLocator), 5);
+        return this;
+    }
 }
