@@ -1,5 +1,6 @@
 package com.selenium.test.pages;
 
+import com.selenium.test.utils.ActionBot;
 import com.selenium.test.webtestsbase.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,19 +29,17 @@ public class ProductsInCategoryListPage extends BasePage {
     }
 
     public ProductsInCategoryListPage addItemToCart(String itemName) {
-        getDriver().findElement(By.xpath("//div[./div/h4/a[contains(text(),'" + itemName + "')]]/div[contains(@class,'button-group')]/button[contains(@onclick,'cart')]")).click();
+        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.xpath("//div[./div/h4/a[contains(text(),'" + itemName + "')]]/div[contains(@class,'button-group')]/button[contains(@onclick,'cart')]"), 5);
         return this;
     }
 
     public ProductsInCategoryListPage showCartItemsList() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(showCartItemsBtnLocator))).click();
+        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.cssSelector(showCartItemsBtnLocator), 5);
         return this;
     }
 
     public CheckoutPage goToCheckout() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(goToCheckoutFromCartIcn))).click();
+        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.cssSelector(goToCheckoutFromCartIcn), 5);
         return new CheckoutPage(false);
     }
 }
