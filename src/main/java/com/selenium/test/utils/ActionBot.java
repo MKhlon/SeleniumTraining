@@ -31,4 +31,14 @@ public class ActionBot {
         click(getDriver().findElement(locator));
     }
 
+    public void waitUntilElementVisible(By locator, int seconds){
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitUntilElementInvisible(By locator, int seconds){
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
 }

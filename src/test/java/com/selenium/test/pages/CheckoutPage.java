@@ -19,6 +19,8 @@ public class CheckoutPage extends BasePage {
     private WebElement accordion; // it works because id of element is "accordion'
 
     private String guestCheckoutRadioBtnCssLocator = "input[value=guest]";
+    private String checkoutOptionAccordionIdLocator = "collapse-checkout-option";
+    private String continueCheckoutOptionsBtnIdLocator = "button-account";
 
     public CheckoutPage(boolean openPageByUrl) {
         super(openPageByUrl);
@@ -35,6 +37,13 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage selectGuestCheckoutOption() {
         new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.cssSelector(guestCheckoutRadioBtnCssLocator), 5);
+        return this;
+    }
+
+    public  CheckoutPage continueToPaymentDetails(){
+        new ActionBot(getDriver()).waitUntilElementVisible(By.id(checkoutOptionAccordionIdLocator), 5);
+        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.id(continueCheckoutOptionsBtnIdLocator), 5);
+        new ActionBot(getDriver()).waitUntilElementInvisible(By.id(checkoutOptionAccordionIdLocator), 5);
         return this;
     }
 }

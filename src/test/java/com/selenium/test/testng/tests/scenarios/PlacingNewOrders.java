@@ -29,7 +29,8 @@ public class PlacingNewOrders {
                     .addItemToCart(ITEM)
                     .showCartItemsList()
                     .goToCheckout()
-                        .selectGuestCheckoutOption();
+                        .selectGuestCheckoutOption()
+                        .continueToPaymentDetails();
     }
 
     @AfterTest
