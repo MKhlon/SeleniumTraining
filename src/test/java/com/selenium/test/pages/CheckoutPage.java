@@ -6,10 +6,6 @@ import com.selenium.test.utils.ActionBot;
 import com.selenium.test.webtestsbase.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by SG0943274 on 2017-03-23.
@@ -21,6 +17,14 @@ public class CheckoutPage extends BasePage {
     private String guestCheckoutRadioBtnCssLocator = "input[value=guest]";
     private String checkoutOptionAccordionIdLocator = "collapse-checkout-option";
     private String continueCheckoutOptionsBtnIdLocator = "button-account";
+    private String personalDetailsAccordionIdLocator = "collapse-payment-address";
+    private String continuePersonalDetailsBtnIdLocator = "button-guest";
+    private String deliveryMethodAccordionIdLocator = "collapse-shipping-method";
+    private String continueDeliveryMethodBtnIdLocator = "button-shipping-method";
+    private String paymentMethodAccordionIdLocator = "collapse-payment-method";
+    private String continuePaymentMethodBtnIdLocator = "button-payment-method";
+    private String orderConfirmationAccordionIdLocator ="collapse-checkout-confirm";
+    private String confirmOrderBtnIdLocator = "button-confirm";
     private String firstNamePersonalDataInputIdLocator = "input-payment-firstname";
     private String lastNamePersonalDataInputIdLocator = "input-payment-lastname";
     private String emailPersonalDataInputIdLocator = "input-payment-email";
@@ -30,6 +34,7 @@ public class CheckoutPage extends BasePage {
     private String postCodePersonalDataInputIdLocator = "input-payment-postcode";
     private String countryPersonalDataSelectIdLocator = "input-payment-country";
     private String regionPersonalDataSelectIdLocator = "input-payment-zone";
+    private String deliveryMethodCommentTextAreaNameLocator = "comment";
 
     public CheckoutPage(boolean openPageByUrl) {
         super(openPageByUrl);
@@ -50,9 +55,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public  CheckoutPage continueToPaymentDetails(){
-        new ActionBot(getDriver()).waitUntilElementVisible(By.id(checkoutOptionAccordionIdLocator), 5);
-        new ActionBot(getDriver()).waitUntilElementClickableAndClickOnIt(By.id(continueCheckoutOptionsBtnIdLocator), 5);
-        new ActionBot(getDriver()).waitUntilElementInvisible(By.id(checkoutOptionAccordionIdLocator), 5);
+        new ActionBot(getDriver()).jumpFromAccordionTab(By.id(checkoutOptionAccordionIdLocator), By.id(continueCheckoutOptionsBtnIdLocator));
         return this;
     }
 
@@ -67,6 +70,31 @@ public class CheckoutPage extends BasePage {
         selectCountry(address.getCountry());
         selectRegionOrState(address.getRegion());
         return this;
+    }
+
+    public  CheckoutPage continueToDeliveryMethod(){
+        new ActionBot(getDriver()).jumpFromAccordionTab(By.id(personalDetailsAccordionIdLocator), By.id(continuePersonalDetailsBtnIdLocator));
+        return this;
+    }
+
+    public CheckoutPage fillDeliveryMethodComment(String commentText) {
+        new ActionBot(getDriver()).type(By.name(deliveryMethodCommentTextAreaNameLocator), commentText);
+        return this;
+    }
+
+    public  CheckoutPage continueToPaymentMethod(){
+        new ActionBot(getDriver()).jumpFromAccordionTab(By.id(deliveryMethodAccordionIdLocator),By.id(continueDeliveryMethodBtnIdLocator));
+        return this;
+    }
+
+    public CheckoutPage continueToOrderConfirmation() {
+        new ActionBot(getDriver()).jumpFromAccordionTab(By.id(paymentMethodAccordionIdLocator),By.id(continuePaymentMethodBtnIdLocator));
+        return this;
+    }
+
+    public SuccessfulOrderConfirmationPage confirmOrder() {
+        new ActionBot(getDriver()).jumpFromAccordionTab(By.id(orderConfirmationAccordionIdLocator),By.id(confirmOrderBtnIdLocator));
+        return new SuccessfulOrderConfirmationPage();
     }
 
     private void typeFirstName(String firstName) {

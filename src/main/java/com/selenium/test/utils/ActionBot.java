@@ -18,6 +18,8 @@ public class ActionBot {
 
     private final WebDriver driver;
 
+    private final int DEFAULT_TIMEOUT = 5;
+
     public static final String SKIP_VALUE = "SKIP_VALUE";
 
     public ActionBot(WebDriver driver) {
@@ -34,9 +36,9 @@ public class ActionBot {
         click(getDriver().findElement(locator));
     }
 
-    public void waitUntilElementVisible(By locator, int seconds){
+    public WebElement waitUntilElementVisible(By locator, int seconds){
         WebDriverWait wait = new WebDriverWait(driver, seconds);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void waitUntilElementInvisible(By locator, int seconds){
@@ -60,4 +62,11 @@ public class ActionBot {
     public void selectByVisibleText(By id, String text) {
         new Select(driver.findElement(id)).selectByVisibleText(text);
     }
+
+    public void jumpFromAccordionTab(By accordionTabLocator, By buttonLocator) {
+        waitUntilElementVisible(accordionTabLocator, DEFAULT_TIMEOUT);
+        waitUntilElementClickableAndClickOnIt(buttonLocator, DEFAULT_TIMEOUT);
+        waitUntilElementInvisible(accordionTabLocator, DEFAULT_TIMEOUT);
+    }
+
 }

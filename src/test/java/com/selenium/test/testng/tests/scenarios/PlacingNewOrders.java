@@ -7,6 +7,7 @@ import com.selenium.test.to.Buyer;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.testng.annotations.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Listeners({ScreenShotOnFailListener.class})
@@ -15,6 +16,8 @@ public class PlacingNewOrders {
     private static final String CATEGORY = "Akcesoria";
     private static final String SUBCATEGORY = "Monitory";
     private static final String ITEM = "Samsung SyncMaster 941BW";
+    private static final String COMMENT = "Komentarz do testowego zamówienia";
+    private static final String SUCCESSFUL_ORDER_CONFIRMATION_TEXT = "Twoje zamówienie zostało przetworzone!";
 
     @DataProvider(name = "buyerAndAddressData")
     public Object[][] createData1() {
@@ -45,14 +48,21 @@ public class PlacingNewOrders {
 
     @Test(dataProvider = "buyerAndAddressData")
     public void shouldPlaceNewOrderWithoutRegistration(Buyer buyer, Address address) {
-        new LandingPage()
+        assertEquals(
+                new LandingPage()
                 .goToProductList(CATEGORY, SUBCATEGORY)
                     .addItemToCart(ITEM)
                     .showCartItemsList()
                     .goToCheckout()
                         .selectGuestCheckoutOption()
                         .continueToPaymentDetails()
-                        .fillFormWithRequiredPersonalData(buyer, address);
+                        .fillFormWithRequiredPersonalData(buyer, address)
+                        .continueToDeliveryMethod()
+                        .fillDeliveryMethodComment(COMMENT)
+                        .continueToPaymentMethod()
+                        .continueToOrderConfirmation()
+                        .confirmOrder()
+                            .getPageHeader(), SUCCESSFUL_ORDER_CONFIRMATION_TEXT);
     }
 
     @AfterTest

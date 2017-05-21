@@ -1,5 +1,6 @@
 package com.selenium.test.webtestsbase;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
