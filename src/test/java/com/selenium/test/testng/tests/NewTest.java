@@ -11,4 +11,7 @@ public class NewTest {
     public void clickTestButton(){
         testButton.click();
     }
+
+    @FindBy(id = "")
+    private WebElement cancelButton
 }
