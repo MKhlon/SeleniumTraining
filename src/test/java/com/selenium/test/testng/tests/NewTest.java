@@ -12,6 +12,6 @@ public class NewTest {
         testButton.click();
     }
 
-    @FindBy(id = "")
-    private WebElement cancelButton
+    @FindBy(id = "cancelButton")
+    private WebElement cancelButton;
 }
